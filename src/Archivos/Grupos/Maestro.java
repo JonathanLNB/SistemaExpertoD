@@ -1,4 +1,5 @@
 package Archivos.Grupos;
+
 import TDA.Grupo;
 
 import java.io.IOException;
@@ -91,6 +92,31 @@ public class Maestro {
             e.printStackTrace();
         } finally {
             return grupos;
+        }
+    }
+
+    public Grupo obtenerGrupo(int idGrupo) {
+        int[] etiquetas = new int[8];
+        long apActual, apFinal;
+        int valor;
+        Grupo grupo = null;
+        try {
+            archivoR = new RandomAccessFile("maestroG.gsh", "r");
+            while ((apActual = archivoR.getFilePointer()) != (apFinal = archivoR.length())) {
+                valor = archivoR.readInt();
+                for (int i = 0; i < 8; i++)
+                    etiquetas[i] = archivoR.readInt();
+                if (valor != 0) {
+                    if (valor == idGrupo) {
+                        grupo = new Grupo(valor, etiquetas);
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return grupo;
         }
     }
 

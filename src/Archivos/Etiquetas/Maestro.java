@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Maestro {
     private RandomAccessFile archivoR;
     private long ultimo = 0;
-    
+
     public void escribirB(int llave, String nombre) {
         StringBuffer bf;
         try {
@@ -72,7 +72,7 @@ public class Maestro {
         }
     }
 
-    public ArrayList<Etiqueta> obteneretiquetas() {
+    public ArrayList<Etiqueta> obtenerEtiquetas() {
         String nom;
         int valor;
         long apActual, apFinal;
@@ -93,6 +93,33 @@ public class Maestro {
             e.printStackTrace();
         } finally {
             return etiquetas;
+        }
+    }
+
+    public Etiqueta obtenerEtiqueta(int idEtiqueta) {
+        String nom;
+        int valor;
+        long apActual, apFinal;
+        char nombre[] = new char[99];
+        Etiqueta etiqueta = null;
+        try {
+            archivoR = new RandomAccessFile("maestroE.gsh", "r");
+            while ((apActual = archivoR.getFilePointer()) != (apFinal = archivoR.length())) {
+                valor = archivoR.readInt();
+                for (int i = 0; i < nombre.length; i++)
+                    nombre[i] = archivoR.readChar();
+                nom = new String(nombre).replace('\0', ' ');
+                if (valor != 0) {
+                    if (idEtiqueta == valor) {
+                        etiqueta = new Etiqueta(valor, nom);
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return etiqueta;
         }
     }
 

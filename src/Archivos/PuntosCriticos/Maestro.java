@@ -13,7 +13,7 @@ public class Maestro {
 
     public void escribirB(int llave, int[] puntos) {
         try {
-            archivoR = new RandomAccessFile("maestroR.gsh", "rw");
+            archivoR = new RandomAccessFile("maestroP.gsh", "rw");
             ultimo = archivoR.length();
             archivoR.seek(ultimo);
             archivoR.writeInt(llave);
@@ -36,7 +36,7 @@ public class Maestro {
         int aux, aux2;
         try {
             if (posicion != -1) {
-                archivoR = new RandomAccessFile("maestroR.gsh", "r");
+                archivoR = new RandomAccessFile("maestroP.gsh", "r");
                 archivoR.seek(posicion);
                 System.out.println("Llave: " + archivoR.readInt());
                 for (int i = 0; i < 16; i++) {
@@ -57,12 +57,12 @@ public class Maestro {
         int valor, aux, aux2;
         long apActual, apFinal;
         try {
-            archivoR = new RandomAccessFile("maestroR.gsh", "r");
+            archivoR = new RandomAccessFile("maestroP.gsh", "r");
             while ((apActual = archivoR.getFilePointer()) != (apFinal = archivoR.length())) {
                 valor = archivoR.readInt();
                 if (valor != 0) {
                     System.out.println("Llave: " + valor);
-                    for (int i = 0; i < 16; i++) {
+                    for (int i = 0; i < 8; i++) {
                         aux = archivoR.readInt();
                         aux2 = archivoR.readInt();
                         if (aux != -1)
@@ -82,7 +82,7 @@ public class Maestro {
         long apActual, apFinal;
         ArrayList<PuntosCriticos> puntos = new ArrayList<>();
         try {
-            archivoR = new RandomAccessFile("maestroR.gsh", "r");
+            archivoR = new RandomAccessFile("maestroP.gsh", "r");
             while ((apActual = archivoR.getFilePointer()) != (apFinal = archivoR.length())) {
                 valor = archivoR.readInt();
                 punto1[0] = archivoR.readInt();
@@ -117,7 +117,7 @@ public class Maestro {
         int llave;
         try {
             if (posicion != -1) {
-                archivoR = new RandomAccessFile("maestroR.gsh", "rw");
+                archivoR = new RandomAccessFile("maestroP.gsh", "rw");
                 archivoR.seek(posicion);
                 if (!eliminar) {
                     llave = archivoR.readInt();
@@ -134,8 +134,9 @@ public class Maestro {
                     archivoR.seek(posicion);
                 } else {
                     archivoR.writeInt(0);
-                    for (int i = 0; i < 99; i++)
-                        archivoR.writeChar('0');
+                    for (int i = 0; i < 16; i++) {
+                        archivoR.writeInt(0);
+                    }
                 }
             } else
                 System.out.println("Error, Ese registro no existe.");
@@ -146,6 +147,6 @@ public class Maestro {
     }
 
     public int getUltimo() {
-        return (int) (ultimo - 20);
+        return (int) (ultimo - 68);
     }
 }

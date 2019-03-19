@@ -72,7 +72,7 @@ public class Maestro {
                     System.out.println("Llave: " + valor);
                     System.out.println("Nombre: " + nom);
                     System.out.println("Grupo: " + grupo);
-                    System.out.println("Depende: " + depende);
+                    System.out.println("Depende: " + ((depende != -1) ? depende : "Nadie"));
                     System.out.println("---------------------------------------------------");
                 }
             }
@@ -81,12 +81,12 @@ public class Maestro {
         }
     }
 
-    public ArrayList<Variable> obtenerReglas() {
+    public ArrayList<Variable> obtenerVariables() {
         String nom;
         int valor, grupo, depende;
         long apActual, apFinal;
         char nombre[] = new char[99];
-        ArrayList<Variable> reglas = new ArrayList<>();
+        ArrayList<Variable> varibales = new ArrayList<>();
         try {
             archivoR = new RandomAccessFile("maestroV.gsh", "r");
             while ((apActual = archivoR.getFilePointer()) != (apFinal = archivoR.length())) {
@@ -97,13 +97,42 @@ public class Maestro {
                 grupo = archivoR.readInt();
                 depende = archivoR.readInt();
                 if (valor != 0) {
-                    reglas.add(new Variable(valor, nom, grupo, depende));
+                    varibales.add(new Variable(valor, nom, grupo, depende));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            return reglas;
+            return varibales;
+        }
+    }
+
+    public Variable obtenerVariable(int idVariable) {
+        String nom;
+        int valor, grupo, depende;
+        long apActual, apFinal;
+        char nombre[] = new char[99];
+        Variable variable = null;
+        try {
+            archivoR = new RandomAccessFile("maestroV.gsh", "r");
+            while ((apActual = archivoR.getFilePointer()) != (apFinal = archivoR.length())) {
+                valor = archivoR.readInt();
+                for (int i = 0; i < nombre.length; i++)
+                    nombre[i] = archivoR.readChar();
+                nom = new String(nombre).replace('\0', ' ');
+                grupo = archivoR.readInt();
+                depende = archivoR.readInt();
+                if (valor != 0) {
+                    if (valor == idVariable) {
+                        variable = new Variable(valor, nom, grupo, depende);
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return variable;
         }
     }
 
