@@ -365,9 +365,9 @@ public class Simulador {
             if(i == 1)
                 System.out.println("Semi-Reprobado: "+resultadosD[i]);
             if(i == 2)
-                System.out.println("Puede: "+resultadosD[i]);
+                System.out.println("Pasaste de panzaso: "+resultadosD[i]);
             if(i == 3)
-                System.out.println("Bueno: "+resultadosD[i]);
+                System.out.println("Esooooo: "+resultadosD[i]);
             if(i == 4)
                 System.out.println("Excelente: "+resultadosD[i]);
         }
@@ -432,11 +432,7 @@ public class Simulador {
 
     private double[] maximos(String aux[]) {
         double max[] = new double[5];
-        max[0] = 0;
-        max[1] = 0;
-        max[2] = 0;
-        max[3] = 0;
-        max[4] = 0;
+
         for (int i = 0; i < aux.length; i++) {
             if (aux[i].split(",")[0].equals("N"))
                 max[0] = max[0] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[0];
