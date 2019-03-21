@@ -353,6 +353,7 @@ public class Simulador {
         famAux[1] = "N,1," + puntosCriticos.get(0).getVariable().getGrupo().getEtiquetas().get(1).getGradoM();
         for (int i = 1; i < puntosCriticos.size(); i++)
             famAux = generarMatrizFAM(famAux, puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas());
+        mostrarMatriz(famAux);
         resultadosD = maximos(famAux);
         System.out.println("--------------------------------------------");
         System.out.println("*********** Resultados Difusos *************");
@@ -360,11 +361,11 @@ public class Simulador {
         for(int i = 0; i<resultadosD.length; i++){
             System.out.print("Grados de membresia en ");
             if(i == 0)
-                System.out.println("Nulo: "+resultadosD[i]);
+                System.out.println("Reprobado: "+resultadosD[i]);
             if(i == 1)
-                System.out.println("Insuficiente: "+resultadosD[i]);
+                System.out.println("Semi-Reprobado: "+resultadosD[i]);
             if(i == 2)
-                System.out.println("Puede Mejorar: "+resultadosD[i]);
+                System.out.println("Puede: "+resultadosD[i]);
             if(i == 3)
                 System.out.println("Bueno: "+resultadosD[i]);
             if(i == 4)
@@ -408,14 +409,6 @@ public class Simulador {
         return gMembresia;
     }
 
-   /* private ArrayList<String> generarMatrizFAM() {
-        int tamano = puntosCriticos.get(0).getVariable().getGrupo().getEtiquetas().size();
-        for (int i = 1; i < puntosCriticos.size(); i++)
-            tamano *= puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().size();
-
-        return null;
-    }*/
-
     private String[] generarMatrizFAM(String aux[], ArrayList<Etiqueta> etiquetas) {
         String salida[] = new String[aux.length * etiquetas.size()];
         int cont = 0;
@@ -445,8 +438,6 @@ public class Simulador {
         max[3] = 0;
         max[4] = 0;
         for (int i = 0; i < aux.length; i++) {
-            if(i == 2551)
-                System.out.println("Hola");
             if (aux[i].split(",")[0].equals("N"))
                 max[0] = max[0] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[0];
             if (aux[i].split(",")[0].equals("I"))
@@ -459,6 +450,19 @@ public class Simulador {
                 max[4] = max[4] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[4];
         }
         return max;
+    }
+
+    public void mostrarMatriz(String aux[]){
+        int cont = 0;
+        for (int i = 0; i < aux.length; i++) {
+            System.out.print(aux[i].split(",")[0]+" | ");
+            cont++;
+            if(cont == 54) {
+                System.out.println("");
+                cont=0;
+            }
+        }
+        System.out.println("");
     }
 
     private void inicializar(int[] puntos) {
