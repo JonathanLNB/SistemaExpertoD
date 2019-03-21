@@ -2,6 +2,7 @@ package TDA;
 
 public class PuntosCriticos {
     private int llave;
+    private Variable variable;
     private int punto1[];
     private int punto2[];
     private int punto3[];
@@ -21,6 +22,14 @@ public class PuntosCriticos {
         this.punto6 = punto6;
         this.punto7 = punto7;
         this.punto8 = punto8;
+    }
+
+    public Variable getVariable() {
+        return variable;
+    }
+
+    public void setVariable(Variable variable) {
+        this.variable = variable;
     }
 
     public int getLlave() {

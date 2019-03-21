@@ -84,6 +84,14 @@ public class Maestro {
         try {
             archivoR = new RandomAccessFile("maestroP.gsh", "r");
             while ((apActual = archivoR.getFilePointer()) != (apFinal = archivoR.length())) {
+                punto1 = new int[2];
+                punto2 = new int[2];
+                punto3 = new int[2];
+                punto4 = new int[2];
+                punto5 = new int[2];
+                punto6 = new int[2];
+                punto7 = new int[2];
+                punto8 = new int[2];
                 valor = archivoR.readInt();
                 punto1[0] = archivoR.readInt();
                 punto1[1] = archivoR.readInt();

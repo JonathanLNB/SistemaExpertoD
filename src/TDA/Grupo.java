@@ -1,12 +1,16 @@
 package TDA;
 
+import java.util.ArrayList;
+
 public class Grupo {
     private int llave;
-    private int[] etiquetas;
+    private int[] idEtiquetas;
+    private ArrayList<Etiqueta> etiquetas;
 
-    public Grupo(int llave, int[] etiquetas) {
+    public Grupo(int llave, int[] idEtiquetas) {
         this.llave = llave;
-        this.etiquetas = etiquetas;
+        this.idEtiquetas = idEtiquetas;
+        etiquetas = new ArrayList<>();
     }
 
     public int getLlave() {
@@ -17,11 +21,19 @@ public class Grupo {
         this.llave = llave;
     }
 
-    public int[] getEtiquetas() {
-        return etiquetas;
+    public int[] getIdEtiquetas() {
+        return idEtiquetas;
     }
 
-    public void setEtiquetas(int[] etiquetas) {
+    public void setIdEtiquetas(int[] idEtiquetas) {
+        this.idEtiquetas = idEtiquetas;
+    }
+
+    public void setEtiquetas(ArrayList<Etiqueta> etiquetas) {
         this.etiquetas = etiquetas;
+    }
+
+    public ArrayList<Etiqueta> getEtiquetas() {
+        return etiquetas;
     }
 }

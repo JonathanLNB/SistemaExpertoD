@@ -1,6 +1,9 @@
+import TDA.Etiqueta;
 import TDA.Grupo;
+import TDA.PuntosCriticos;
 import TDA.Variable;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Simulador {
@@ -13,6 +16,9 @@ public class Simulador {
     private Archivos.Variables.Indexado indexadoV;
     private Archivos.PuntosCriticos.Maestro maestroP;
     private Archivos.PuntosCriticos.Indexado indexadoP;
+    private ArrayList<Variable> variables;
+    private ArrayList<PuntosCriticos> puntosCriticos;
+    private double[] resultadosD;
 
     public Simulador() {
         s = new Scanner(System.in);
@@ -54,6 +60,7 @@ public class Simulador {
                     eliminar();
                     break;
                 case 5:
+                    mostrarOpciones();
                     break;
                 default:
                     System.out.println("Gracias :3");
@@ -257,17 +264,17 @@ public class Simulador {
                 s.nextLine();
                 auxV = maestroV.obtenerVariable(llave);
                 if (auxV != null) {
-                    auxG = maestroG.obtenerGrupo(auxV.getGrupo());
+                    auxG = maestroG.obtenerGrupo(auxV.getIdGrupo());
                     if (auxG != null) {
-                        puntos = new int[auxG.getEtiquetas().length * 2];
+                        puntos = new int[auxG.getIdEtiquetas().length * 2];
                         inicializar(puntos);
-                        for (int i = 0; i < auxG.getEtiquetas().length; i++) {
-                            if (auxG.getEtiquetas()[i] != -1) {
-                                etiqueta = maestroE.obtenerEtiqueta(auxG.getEtiquetas()[i]).getNombre();
-                                System.out.println("Ingresa Punto Critico 1 para " + etiqueta.trim() + ": ");
+                        for (int i = 0; i < auxG.getIdEtiquetas().length; i++) {
+                            if (auxG.getIdEtiquetas()[i] != -1) {
+                                etiqueta = maestroE.obtenerEtiqueta(auxG.getIdEtiquetas()[i]).getNombre();
+                                System.out.println("Ingresa El Rango Inicial " + etiqueta.trim() + ": ");
                                 puntos[cont] = s.nextInt();
                                 cont++;
-                                System.out.println("Ingresa Punto Critico 2 para " + etiqueta.trim() + ": ");
+                                System.out.println("Ingresa El Rango Final " + etiqueta.trim() + ": ");
                                 puntos[cont] = s.nextInt();
                                 cont++;
                             } else
@@ -283,6 +290,175 @@ public class Simulador {
             default:
                 System.out.println("Error: Esa opción no existe :'(");
         }
+    }
+
+    private void mostrarOpciones() {
+        String famAux[] = new String[2];
+        double aux = 0;
+        boolean primera = true;
+        variables = maestroV.obtenerVariables();
+        puntosCriticos = maestroP.obtenerPuntos();
+        System.out.println("*********** Sistema Experto *************");
+        System.out.println("-----------------------------------------");
+        for (int i = 0; i < variables.size(); i++) {
+            System.out.println("Ingresa la calificación referente a \"" + variables.get(i).getNombre().trim() + "\"");
+            if (primera) {
+                primera = false;
+                aux = s.nextInt();
+            } else {
+                if (aux > 70) {
+                    aux = s.nextInt();
+                    if (aux * 1.05 <= 100)
+                        aux *= 1.05;
+                } else
+                    aux = s.nextInt();
+                s.nextLine();
+            }
+            variables.get(i).setCalificacion(aux);
+            puntosCriticos.get(i).setVariable(variables.get(i));
+            puntosCriticos.get(i).getVariable().setGrupo(maestroG.obtenerGrupo(puntosCriticos.get(i).getVariable().getIdGrupo()));
+            for (int e = 0; e < puntosCriticos.get(i).getVariable().getGrupo().getIdEtiquetas().length; e++) {
+                if (puntosCriticos.get(i).getVariable().getGrupo().getIdEtiquetas()[e] != -1) {
+                    puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().add(maestroE.obtenerEtiqueta(puntosCriticos.get(i).getVariable().getGrupo().getIdEtiquetas()[e]));
+                    switch (e) {
+                        case 0:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto1()));
+                            break;
+                        case 1:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto2()));
+                            break;
+                        case 2:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto3()));
+                            break;
+                        case 3:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto3()));
+                            break;
+                        case 4:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto3()));
+                            break;
+                        case 5:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto3()));
+                            break;
+                        case 6:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto3()));
+                            break;
+                        case 7:
+                            puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().get(e).setGradoM(membresia(variables.get(i).getCalificacion(), puntosCriticos.get(i).getPunto3()));
+                            break;
+                    }
+                }
+            }
+        }
+        famAux[0] = "N,0," + puntosCriticos.get(0).getVariable().getGrupo().getEtiquetas().get(0).getGradoM();
+        famAux[1] = "N,1," + puntosCriticos.get(0).getVariable().getGrupo().getEtiquetas().get(1).getGradoM();
+        for (int i = 1; i < puntosCriticos.size(); i++)
+            famAux = generarMatrizFAM(famAux, puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas());
+        resultadosD = maximos(famAux);
+        System.out.println("--------------------------------------------");
+        System.out.println("*********** Resultados Difusos *************");
+        System.out.println("--------------------------------------------");
+        for(int i = 0; i<resultadosD.length; i++){
+            System.out.print("Grados de membresia en ");
+            if(i == 0)
+                System.out.println("Nulo: "+resultadosD[i]);
+            if(i == 1)
+                System.out.println("Insuficiente: "+resultadosD[i]);
+            if(i == 2)
+                System.out.println("Puede Mejorar: "+resultadosD[i]);
+            if(i == 3)
+                System.out.println("Bueno: "+resultadosD[i]);
+            if(i == 4)
+                System.out.println("Excelente: "+resultadosD[i]);
+        }
+        System.out.println("--------------------------------------------");
+
+    }
+
+    private double membresia(double calificacion, int[] rango) {
+        double gMembresia = 0;
+        int rangoM, rangoMax, puntoCritico1, puntoCritico2;
+        rangoM = rango[0];
+        rangoMax = rango[1];
+        puntoCritico1 = (rango[0] == 0) ? rango[0] : rango[0] + 10;
+        puntoCritico2 = (rango[1] == 100) ? rango[1] : rango[1] - 10;
+        if (puntoCritico1 >= 0) {
+            if (puntoCritico2 == -1) {
+                if (calificacion >= rangoM && calificacion <= rangoMax) {
+                    if (calificacion == puntoCritico1)
+                        return 1;
+                    if (calificacion < puntoCritico1)
+                        gMembresia = (double) (calificacion - rangoM) / (puntoCritico1 - rangoM);
+                    if (calificacion > puntoCritico1)
+                        gMembresia = (double) (rangoMax - calificacion) / (rangoMax - puntoCritico1);
+                } else
+                    return 0;
+            } else {
+                if (calificacion >= rangoM && calificacion <= rangoMax) {
+                    if (puntoCritico1 <= calificacion && calificacion <= puntoCritico2)
+                        return 1;
+                    if (calificacion < puntoCritico1)
+                        gMembresia = (double) (calificacion - rangoM) / (puntoCritico1 - rangoM);
+                    if (calificacion > puntoCritico2)
+                        gMembresia = (double) (rangoMax - calificacion) / (rangoMax - puntoCritico2);
+                } else
+                    return 0;
+            }
+        } else
+            return 0;
+        return gMembresia;
+    }
+
+   /* private ArrayList<String> generarMatrizFAM() {
+        int tamano = puntosCriticos.get(0).getVariable().getGrupo().getEtiquetas().size();
+        for (int i = 1; i < puntosCriticos.size(); i++)
+            tamano *= puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas().size();
+
+        return null;
+    }*/
+
+    private String[] generarMatrizFAM(String aux[], ArrayList<Etiqueta> etiquetas) {
+        String salida[] = new String[aux.length * etiquetas.size()];
+        int cont = 0;
+        for (int i = 0; i < aux.length; i++) {
+            for (int e = 0; e < etiquetas.size(); e++) {
+                if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 2)
+                    salida[cont] = "N," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                else if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 4)
+                    salida[cont] = "I," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                else if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 6)
+                    salida[cont] = "P," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                else if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 8)
+                    salida[cont] = "B," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) >= 8)
+                    salida[cont] = "E," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                cont++;
+            }
+        }
+        return salida;
+    }
+
+    private double[] maximos(String aux[]) {
+        double max[] = new double[5];
+        max[0] = 0;
+        max[1] = 0;
+        max[2] = 0;
+        max[3] = 0;
+        max[4] = 0;
+        for (int i = 0; i < aux.length; i++) {
+            if(i == 2551)
+                System.out.println("Hola");
+            if (aux[i].split(",")[0].equals("N"))
+                max[0] = max[0] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[0];
+            if (aux[i].split(",")[0].equals("I"))
+                max[1] = max[1] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[1];
+            if (aux[i].split(",")[0].equals("P"))
+                max[2] = max[2] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[2];
+            if (aux[i].split(",")[0].equals("B"))
+                max[3] = max[3] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[3];
+            if (aux[i].split(",")[0].equals("E"))
+                max[4] = max[4] < Double.parseDouble(aux[i].split(",")[2]) ? Double.parseDouble(aux[i].split(",")[2]) : max[4];
+        }
+        return max;
     }
 
     private void inicializar(int[] puntos) {

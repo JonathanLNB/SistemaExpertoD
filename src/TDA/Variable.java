@@ -3,14 +3,24 @@ package TDA;
 public class Variable {
     private int llave;
     private String nombre;
-    private int grupo;
+    private int idGrupo;
     private int depende;
+    private double calificacion;
+    private Grupo grupo;
 
-    public Variable(int llave, String nombre, int grupo, int depende) {
+    public Variable(int llave, String nombre, int idGrupo, int depende) {
         this.llave = llave;
         this.nombre = nombre;
-        this.grupo = grupo;
+        this.idGrupo = idGrupo;
         this.depende = depende;
+    }
+
+    public double getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(double calificacion) {
+        this.calificacion = calificacion;
     }
 
     public int getLlave() {
@@ -29,12 +39,20 @@ public class Variable {
         this.nombre = nombre;
     }
 
-    public int getGrupo() {
+    public Grupo getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(int grupo) {
+    public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
     }
 
     public int getDepende() {
