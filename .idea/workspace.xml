@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08f777bf-6160-4204-bdb0-a98069243e90" name="Default Changelist" comment="" />
+    <list default="true" id="08f777bf-6160-4204-bdb0-a98069243e90" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Simulador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulador.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Simulador.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-26">
-              <caret line="474" column="26" selection-start-line="474" selection-start-column="26" selection-end-line="474" selection-end-column="26" />
+            <state relative-caret-position="-284">
+              <caret line="460" column="63" selection-start-line="460" selection-start-column="63" selection-end-line="460" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -141,6 +144,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -197,8 +202,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -263,16 +266,18 @@
       <workItem from="1553110027391" duration="17384000" />
       <workItem from="1553184435117" duration="15329000" />
       <workItem from="1553383443866" duration="7126000" />
+      <workItem from="1553392782275" duration="299000" />
+      <workItem from="1553523825530" duration="2534000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69006000" />
+    <option name="totallyTimeSpent" value="71839000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27987897" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28895614" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -448,17 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-          <folding>
-            <element signature="e#63#64#0" expanded="true" />
-            <element signature="e#108#109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TDA/PuntosCriticos.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -533,10 +527,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Simulador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-26">
-          <caret line="474" column="26" selection-start-line="474" selection-start-column="26" selection-end-line="474" selection-end-column="26" />
+        <state relative-caret-position="-284">
+          <caret line="460" column="63" selection-start-line="460" selection-start-column="63" selection-end-line="460" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+          <folding>
+            <element signature="e#63#64#0" expanded="true" />
+            <element signature="e#108#109#0" expanded="true" />
           </folding>
         </state>
       </provider>

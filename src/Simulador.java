@@ -420,16 +420,16 @@ public class Simulador {
         int cont = 0;
         for (int i = 0; i < aux.length; i++) {
             for (int e = 0; e < etiquetas.size(); e++) {
-                if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 2)
-                    salida[cont] = "N," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
-                else if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 4)
-                    salida[cont] = "I," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
-                else if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 6)
-                    salida[cont] = "P," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
-                else if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) < 8)
-                    salida[cont] = "B," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
-                if (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e) >= 8)
-                    salida[cont] = "E," + (Integer.parseInt(aux[i].split(",")[1]) + (e > 1 ? 1 : e)) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                if (Integer.parseInt(aux[i].split(",")[1]) + e < 4)
+                    salida[cont] = "N," + (Integer.parseInt(aux[i].split(",")[1]) + e) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                else if (Integer.parseInt(aux[i].split(",")[1]) + e < 7)
+                    salida[cont] = "I," + (Integer.parseInt(aux[i].split(",")[1]) + e) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                else if (Integer.parseInt(aux[i].split(",")[1]) + e < 10)
+                    salida[cont] = "P," + (Integer.parseInt(aux[i].split(",")[1]) + e) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                else if (Integer.parseInt(aux[i].split(",")[1]) + e < 14)
+                    salida[cont] = "B," + (Integer.parseInt(aux[i].split(",")[1]) + e) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
+                if (Integer.parseInt(aux[i].split(",")[1]) + e >= 14)
+                    salida[cont] = "E," + (Integer.parseInt(aux[i].split(",")[1]) + e) + "," + ((etiquetas.get(e).getGradoM() < Double.parseDouble(aux[i].split(",")[2])) ? etiquetas.get(e).getGradoM() : Double.parseDouble(aux[i].split(",")[2]));
                 cont++;
             }
         }
