@@ -156,9 +156,9 @@ public class Maestro {
                     depende = archivoR.readInt();
                     System.out.print("Cambiar de " + nom.trim() + " a : ");
                     nom = s.nextLine();
-                    System.out.print("Cambiar de " + grupo + " a : ");
+                    System.out.print("Cambiar del Grupo " + grupo + " a : ");
                     grupo = s.nextInt();
-                    System.out.print("Cambiar de " + depende + " a : ");
+                    System.out.print("Cambiar depende de " + depende + " a : ");
                     depende = s.nextInt();
                     archivoR.seek(posicion);
                     archivoR.writeInt(llave);
@@ -167,7 +167,6 @@ public class Maestro {
                     archivoR.writeChars(bf.toString());
                     archivoR.writeInt(grupo);
                     archivoR.writeInt(depende);
-                    archivoR.seek(posicion);
                 } else {
                     archivoR.writeInt(0);
                     for (int i = 0; i < 99; i++)

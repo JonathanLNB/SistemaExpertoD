@@ -66,7 +66,7 @@ public class Maestro {
                         aux = archivoR.readInt();
                         aux2 = archivoR.readInt();
                         if (aux != -1)
-                            System.out.println("Puntos Criticos " + (i + 1) + ": " + aux + "-" + aux2);
+                            System.out.println("Rangos " + (i + 1) + ": " + aux + "-" + aux2);
                     }
                     System.out.println("---------------------------------------------------");
                 }
@@ -122,8 +122,9 @@ public class Maestro {
 
     public void actualizar(long posicion, boolean eliminar) {
         Scanner s = new Scanner(System.in);
-        int llave;
+        int llave, cont = 0, valor[];
         try {
+            valor = new int[16];
             if (posicion != -1) {
                 archivoR = new RandomAccessFile("maestroP.gsh", "rw");
                 archivoR.seek(posicion);
@@ -133,13 +134,19 @@ public class Maestro {
                     archivoR.seek(posicion);
                     archivoR.writeInt(llave);
                     for (int i = 0; i < 8; i++) {
-                        System.out.print("Cambiar del punto critico " + i + " " + archivoR.readInt() + "-" + archivoR.readInt() + " a: ");
-                        System.out.println("Punto Critico 1: ");
-                        archivoR.writeInt(s.nextInt());
-                        System.out.println("Punto Critico 2: ");
-                        archivoR.writeInt(s.nextInt());
+                        System.out.print("Cambiar del Rango " + i + " " + archivoR.readInt() + "-" + archivoR.readInt() + " a: ");
+                        System.out.println("Rango Minimo 1: ");
+                        valor[cont]=s.nextInt();
+                        cont++;
+                        System.out.println("Rango Maximo 2: ");
+                        valor[cont]=s.nextInt();
+                        cont++;
                     }
                     archivoR.seek(posicion);
+                    archivoR.readInt();
+                    for (int i = 0; i < 16; i++) {
+                        archivoR.writeInt(valor[i]);
+                    }
                 } else {
                     archivoR.writeInt(0);
                     for (int i = 0; i < 16; i++) {

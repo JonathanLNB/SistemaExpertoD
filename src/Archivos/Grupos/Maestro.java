@@ -63,8 +63,7 @@ public class Maestro {
                     System.out.println("Llave: " + valor);
                     for (int i = 0; i < 8; i++) {
                         aux = archivoR.readInt();
-                        if (aux != -1)
-                            System.out.println("Etiqueta " + (i + 1) + ": " + aux);
+                        System.out.println("Etiqueta " + (i + 1) + ": " + aux);
                     }
                     System.out.println("---------------------------------------------------");
                 }
@@ -122,8 +121,9 @@ public class Maestro {
 
     public void actualizar(long posicion, boolean eliminar) {
         Scanner s = new Scanner(System.in);
-        int llave, aux, valor;
+        int llave, aux, valor[];
         try {
+            valor = new int[8];
             if (posicion != -1) {
                 archivoR = new RandomAccessFile("maestroG.gsh", "rw");
                 archivoR.seek(posicion);
@@ -135,10 +135,13 @@ public class Maestro {
                     for (int i = 0; i < 8; i++) {
                         aux = archivoR.readInt();
                         System.out.print("Cambiar de " + aux + " a la etiqueta: ");
-                        valor = s.nextInt();
-                        archivoR.writeInt(valor);
+                        valor[i] = s.nextInt();
                     }
                     archivoR.seek(posicion);
+                    archivoR.readInt();
+                    for (int i = 0; i < 8; i++) {
+                        archivoR.writeInt(valor[i]);
+                    }
                 } else {
                     archivoR.writeInt(0);
                     for (int i = 0; i < 8; i++)

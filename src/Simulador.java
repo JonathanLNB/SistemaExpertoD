@@ -36,6 +36,7 @@ public class Simulador {
     public void configuracion() {
         int aux;
         do {
+            System.out.println("----------------------------------");
             System.out.println("************* Menú ***************");
             System.out.println("----------------------------------");
             System.out.println("Ingresa la opción deseada");
@@ -298,6 +299,7 @@ public class Simulador {
         boolean primera = true;
         variables = maestroV.obtenerVariables();
         puntosCriticos = maestroP.obtenerPuntos();
+        System.out.println("-----------------------------------------");
         System.out.println("*********** Sistema Experto *************");
         System.out.println("-----------------------------------------");
         for (int i = 0; i < variables.size(); i++) {
@@ -306,7 +308,7 @@ public class Simulador {
                 primera = false;
                 aux = s.nextInt();
             } else {
-                if (aux > 70) {
+                if (aux > 80) {
                     aux = s.nextInt();
                     if (aux * 1.05 <= 100)
                         aux *= 1.05;
@@ -353,7 +355,7 @@ public class Simulador {
         famAux[1] = "N,1," + puntosCriticos.get(0).getVariable().getGrupo().getEtiquetas().get(1).getGradoM();
         for (int i = 1; i < puntosCriticos.size(); i++)
             famAux = generarMatrizFAM(famAux, puntosCriticos.get(i).getVariable().getGrupo().getEtiquetas());
-        //mostrarMatriz(famAux);
+        mostrarMatriz(famAux);
         resultadosD = maximos(famAux);
         System.out.println("--------------------------------------------");
         System.out.println("*********** Resultados Difusos *************");
@@ -363,11 +365,11 @@ public class Simulador {
             if (i == 0)
                 System.out.println("Reprobado: " + resultadosD[i]);
             if (i == 1)
-                System.out.println("Semi-Reprobado: " + resultadosD[i]);
+                System.out.println("Semi-Aprobado: " + resultadosD[i]);
             if (i == 2)
                 System.out.println("Pasaste de panzaso: " + resultadosD[i]);
             if (i == 3)
-                System.out.println("Esooooo: " + resultadosD[i]);
+                System.out.println("Bueno: " + resultadosD[i]);
             if (i == 4)
                 System.out.println("Excelente: " + resultadosD[i]);
         }
@@ -454,11 +456,10 @@ public class Simulador {
         return max;
     }
 
-    /*
         public void mostrarMatriz(String aux[]) {
             int cont = 0;
             for (int i = 0; i < aux.length; i++) {
-                System.out.print(aux[i].split(",")[0] + " | ");
+                System.out.print(aux[i].split(",")[0] + ",");
                 cont++;
                 if (cont == 54) {
                     System.out.println("");
@@ -467,7 +468,6 @@ public class Simulador {
             }
             System.out.println("");
         }
-    */
     private PuntosCriticos generarConsecuente() {
         int p1[] = {0, 30};
         int p2[] = {25, 70};
@@ -486,7 +486,7 @@ public class Simulador {
     private double centroide(double[] grdMenbrecia, PuntosCriticos puntosCriticos) {
         double sum = 0;
         double prod = 0;
-        for (double i = 0.0; i < 100.0; i += 1) {
+        for (double i = 0.0; i < 100.0; i += 0.00001) {
             prod += i * membresia(i, puntosCriticos.getPunto1(), grdMenbrecia[0]);
             prod += i * membresia(i, puntosCriticos.getPunto2(), grdMenbrecia[1]);
             prod += i * membresia(i, puntosCriticos.getPunto3(), grdMenbrecia[2]);
